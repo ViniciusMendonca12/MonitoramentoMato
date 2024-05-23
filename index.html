@@ -48,7 +48,7 @@
             </div>
 
             <div style="display: flex;">
-                <button style="margin-top: 40px;" data-bs-toggle="modalConfirmacao" data-bs-target="#modalConfirmacao" onclick="monitorarSojaClick()" class="btn">Monitorar </button>
+                <button style="margin-top: 40px;" data-bs-toggle="modalConfirmacao" data-bs-target="#modalConfirmacao" id="monitorarSojaClick" class="btn">Monitorar </button>
                 <button style="margin-top: 40px; margin-left: 20px;" onclick="voltarClick()" class="btn">Voltar </button>
             </div>
 
@@ -69,7 +69,7 @@
             </div>
 
             <div style="display: flex;">
-                <button style="margin-top: 40px;" data-bs-toggle="modalConfirmacao" data-bs-target="#modalConfirmacao" onclick="monitorarMilhoClick()" class="btn">Monitorar </button>
+                <button style="margin-top: 40px;" data-bs-toggle="modalConfirmacao" data-bs-target="#modalConfirmacao" id="monitorarMilhoClick" class="btn">Monitorar </button>
                 <button style="margin-top: 40px; margin-left: 20px;" onclick="voltarClick()" class="btn">Voltar </button>
             </div>
 
@@ -90,7 +90,7 @@
             </div>
 
             <div style="display: flex;">
-                <button style="margin-top: 40px;" data-bs-toggle="modalConfirmacao" data-bs-target="#modalConfirmacao" onclick="monitorarAlgodaoClick()" class="btn">Monitorar </button>
+                <button style="margin-top: 40px;" data-bs-toggle="modalConfirmacao" data-bs-target="#modalConfirmacao" id="monitorarAlgodaoClick" class="btn">Monitorar </button>
                 <button style="margin-top: 40px; margin-left: 20px;" onclick="voltarClick()" class="btn">Voltar </button>
             </div>
 
@@ -180,12 +180,12 @@ function voltarClick(){
 
 function modalLagarto(){
     tituloModal.text("Lagarta-da-soja(Helicoverpa armigera) ")
-    paragrafoModal.text("Temperatura: Clima quente, ideal entre 20°C e 28°C. Umidade do ar: Umidade relativa do ar entre 60% e 80%. Umidade do solo: Solo úmido, mas não encharcado.")
+    paragrafoModal.text("Temperatura: Clima quente, ideal entre 20°C e 28°C. Umidade do ar: Umidade relativa do ar entre 20% e 40%. Umidade do solo: Solo úmido, mas não encharcado.")
 }
 
 function modalMosca(){
     tituloModal.text("Mosca-branca (Bemisia tabaci)")
-    paragrafoModal.text("Temperatura: Clima quente e seco, ideal entre 25°C e 30°C. Umidade do ar: Umidade relativa do ar baixa, ideal entre 40% e 60%. Umidade do solo: Solo seco.")
+    paragrafoModal.text("Temperatura: Clima quente e seco, ideal entre 25°C e 30°C. Umidade do ar: Umidade relativa do ar baixa, ideal entre 20% e 40%. Umidade do solo: Solo seco.")
 }
 
 function modalFerrugem(){
@@ -201,7 +201,7 @@ function modalNematoide(){
 
 function modalLagartoCartucho(){
     tituloModal.text("Lagarta-do-cartucho (Spodoptera frugiperda)")
-    paragrafoModal.text("Temperatura: Clima quente e úmido, ideal entre 25°C e 30°C. Umidade do ar: Umidade relativa do ar alta, acima de 70%. Umidade do solo: Solo úmido.")
+    paragrafoModal.text("Temperatura: Clima quente e úmido, ideal entre 25°C e 30°C. Umidade do ar: Umidade relativa do ar alta, acima de 40%. Umidade do solo: Solo úmido.")
 }
 
 function modalMyzus(){
@@ -245,39 +245,6 @@ function fecharMonitoramentoBtn(){
 }
 var paragrafoModalConfirmacao = $("#paragrafoModalConfirmacao")
 
-function monitorarSojaClick(){
-    paragrafoModalConfirmacao.html("")
-    tituloModalMonitoramento.text("Monitoramento da Soja")
-    paragrafoModalMonitoramento.text("")
-    $("#modalConfirmacao").modal("show");
-    monitoraPragasSoja(26, 60, "Solo seco")
-
-  
-};
-
-
-function monitorarMilhoClick(){
-    paragrafoModalConfirmacao.html("")
-    tituloModalMonitoramento.text("Monitoramento do Milho")
-    paragrafoModalMonitoramento.text()
-    $("#modalConfirmacao").modal("show");
-    monitoraPragasMilho(temperatura, umidadeAr, "Solo seco")
-
-
-}
-
-function monitorarAlgodaoClick(){
-    paragrafoModalConfirmacao.html("")
-    tituloModalMonitoramento.text("Monitoramento do Algodão")
-    paragrafoModalMonitoramento.text()
-    $("#modalConfirmacao").modal("show");
-    monitoraPragasAlgodao(26, 60, "Solo úmido, mas não encharcado")
-
-
-}
-
-
-
 function buscarDadosThingSpeak(channelID, apiKey, callback) {
   var url = "https://api.thingspeak.com/channels/" + channelID + "/feeds.json?api_key=" + apiKey;
 
@@ -296,21 +263,50 @@ $(document).ready(function() {
   var canalID = "2533323"; // 
   var apiKey = "QGNJSGKCKAQOS5NM";
 
+    var temperatura 
+    var umidadeAr 
+    var umidadeSolo
   buscarDadosThingSpeak(canalID, apiKey, function(dados) {
     var tamanho = dados.feeds.length
     console.log(tamanho)
     console.log(dados); 
-    console.log(dados.feeds[92].field1);
-    console.log(dados.feeds[92].field2);  
-    var temperatura = dados.feeds[92].field1
-    var umidadeAr = dados.feeds[92].field2
+    console.log(dados.feeds[99].field1);
+    console.log(dados.feeds[99].field2); 
+    console.log(dados.feeds[99].field3);  
+ 
+    var temperatura = dados.feeds[99].field1
+    var umidadeAr = dados.feeds[99].field2
+    var umidadeSolo = dados.feeds[99].field3
 
-/*     monitoraPragasSoja(26, 60, "Solo seco")
- */    /* monitoraPragasMilho(26, 60, "Solo seco") */
-/*     monitoraPragasAlgodao(26, 60, "Solo úmido, mas não encharcado")
- */
+    $("#monitorarSojaClick").click(function(){
+    paragrafoModalConfirmacao.html("")
+    tituloModalMonitoramento.text("Monitoramento da Soja")
+    paragrafoModalMonitoramento.text("")
+    $("#modalConfirmacao").modal("show");
+    monitoraPragasSoja(temperatura, umidadeAr, umidadeSolo)
+})
+
+$("#monitorarMilhoClick").click(function(){
+    paragrafoModalConfirmacao.html("")
+    tituloModalMonitoramento.text("Monitoramento do Milho")
+    paragrafoModalMonitoramento.text()
+    $("#modalConfirmacao").modal("show");
+    monitoraPragasMilho(temperatura, umidadeAr, umidadeSolo)
+})
+
+$("#monitorarAlgodaoClick").click(function(){
+    paragrafoModalConfirmacao.html("")
+    tituloModalMonitoramento.text("Monitoramento do Algodão")
+    paragrafoModalMonitoramento.text()
+    $("#modalConfirmacao").modal("show");
+    monitoraPragasAlgodao(temperatura, umidadeAr, umidadeSolo)
+})
+    
   });
 });
+
+
+
 
 
 
@@ -323,25 +319,25 @@ function monitoraPragasSoja(temperatura, umidadeAr, umidadeSolo){
 
     if((temperatura >= 20 && temperatura <= 28) &&
        (umidadeAr >= 60 && umidadeAr <= 80) &&
-       (umidadeSolo == "Solo úmido, mas não encharcado")){
+       (umidadeSolo > 18 && umidadeSolo <= 35 )){
         monitoraLagartoDaSoja = true;
     } 
 
     if((temperatura >= 25 && temperatura <= 30) &&
-       (umidadeAr >= 40 && umidadeAr <= 60) &&
-       (umidadeSolo == "Solo seco")){
+       (umidadeAr >= 20 && umidadeAr <= 40) &&
+       (umidadeSolo > 0 && umidadeSolo > 10 )){
         monitoraMoscaBranca = true; 
     }  
 
     if((temperatura >= 15 && temperatura <= 25) &&
        (umidadeAr >= 80 && umidadeAr <= 100) &&
-       (umidadeSolo == "Solo úmido, mas não encharcado")){
+       (umidadeSolo > 18 && umidadeSolo <= 35)){
         monitoraFerrugemAsiatica = true;
     }
 
     if((temperatura >= 20 && temperatura <= 30) &&
        (umidadeAr >= 50 && umidadeAr <= 80) &&
-       (umidadeSolo == "Solo seco")){
+       (umidadeSolo > 0 && umidadeSolo > 10 )){
         monitoraNematoideDasRaizes = true;
     }     
     console.log("Pragas a serem monitoradas soja:");
@@ -349,6 +345,7 @@ function monitoraPragasSoja(temperatura, umidadeAr, umidadeSolo){
   if (monitoraMoscaBranca) paragrafoModalConfirmacao.append("Mosca Branca &nbsp;<br>") 
   if (monitoraFerrugemAsiatica) paragrafoModalConfirmacao.append("FerrugemAsiatica &nbsp;<br>")
   if (monitoraNematoideDasRaizes) paragrafoModalConfirmacao.append("Nematoide das Raizes &nbsp;<br>")
+  paragrafoModalConfirmacao.append(` Temperatura: ${temperatura} Umidade do Solo: ${umidadeSolo} Umidade do ar: ${umidadeAr}` )
 
 }
 
@@ -360,25 +357,25 @@ var monitoraAfidos = false;
 
 if((temperatura >= 25 && temperatura <= 30) &&
    (umidadeAr >= 70 && umidadeAr <= 100) &&
-   (umidadeSolo == "Solo úmido, mas não encharcado")){
+   (umidadeSolo > 18 && umidadeSolo <= 35)){
     monitoraLagartoCartucho = true;
 } 
 
 if((temperatura >= 20 && temperatura <= 28) &&
 (umidadeAr >= 70 && umidadeAr <= 100) &&
-   (umidadeSolo == "Solo úmido, mas não encharcado")){
+   (umidadeSolo > 18 && umidadeSolo <= 35)){
     monitoraCuruquereCapinzais = true;
 }  
 
 if((temperatura >= 20 && temperatura <= 28) &&
-    (umidadeAr >= 60 && umidadeAr <= 80) &&
-    (umidadeSolo == "Solo úmido, mas não encharcado")){
+    (umidadeAr >= 10 && umidadeAr <= 30) &&
+    (umidadeSolo > 18 && umidadeSolo <= 35)){
     monitoraLagartaSoja = true;
 }
 
 if((temperatura >= 18 && temperatura <= 25) &&
    (umidadeAr >= 40 && umidadeAr <= 60) &&
-   (umidadeSolo == "Solo úmido, mas não encharcado")){
+   (umidadeSolo > 18 && umidadeSolo <= 35)){
     monitoraAfidos = true;
 }     
 console.log("Pragas a serem monitoradas milho:");
@@ -386,6 +383,7 @@ if (monitoraLagartoCartucho) paragrafoModalConfirmacao.html("Lagarto Cartucho &n
 if (monitoraCuruquereCapinzais) paragrafoModalConfirmacao.append("Curuquere Capinzais &nbsp;<br>");
 if (monitoraLagartaSoja) paragrafoModalConfirmacao.append("Lagarta Soja &nbsp;<br>");
 if (monitoraAfidos) paragrafoModalConfirmacao.append("Monitora Afidos &nbsp;<br>");
+paragrafoModalConfirmacao.append(` Temperatura: ${temperatura} Umidade do Solo: ${umidadeSolo} Umidade do ar: ${umidadeAr}` )
 
 }
 
@@ -397,25 +395,25 @@ var LagartaRosca = false;
 
 if((temperatura >= 25 && temperatura <= 32) &&
    (umidadeAr >= 50 && umidadeAr <= 80) &&
-   (umidadeSolo == "Solo úmido, mas não encharcado")){
+   (umidadeSolo > 18 && umidadeSolo <= 35)){
     ManchaAngular = true;
 } 
 
 if((temperatura >= 25 && temperatura <= 30) &&
 (umidadeAr >= 70 && umidadeAr <= 100) &&
-   (umidadeSolo == "Solo úmido, mas não encharcado")){
+   (umidadeSolo > 18 && umidadeSolo <= 35)){
     BicudoAlgodoeiro = true;
 }  
 
 if((temperatura >= 15 && temperatura <= 20) &&
     (umidadeAr >= 81 && umidadeAr <= 100) &&
-    (umidadeSolo == "Solo úmido, encharcado")){
+    (umidadeSolo > 45 && umidadeSolo <= 55)){
     MofoCinzento = true;
 }
 
 if((temperatura >= 20 && temperatura <= 30) &&
-   (umidadeAr >= 60 && umidadeAr <= 80) &&
-   (umidadeSolo == "Solo úmido, mas não encharcado")){
+   (umidadeAr >= 15 && umidadeAr <= 40) &&
+   (umidadeSolo > 18 && umidadeSolo <= 35)){
     LagartaRosca = true;
 }     
 console.log("Pragas a serem monitoradas algodao:");
@@ -423,6 +421,7 @@ if (ManchaAngular) paragrafoModalConfirmacao.html("Mancha Angular &nbsp;<br>");
 if (BicudoAlgodoeiro) paragrafoModalConfirmacao.append("Bicudo Algodoeiro &nbsp;<br>");
 if (MofoCinzento) paragrafoModalConfirmacao.append("Mofo Cinzento &nbsp;<br>");
 if (LagartaRosca) paragrafoModalConfirmacao.append("Lagarta Rosca &nbsp;<br>");
+paragrafoModalConfirmacao.append(` Temperatura: ${temperatura} Umidade do Solo: ${umidadeSolo} Umidade do ar: ${umidadeAr}` )
 
 }
 
