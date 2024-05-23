@@ -180,7 +180,7 @@ function voltarClick(){
 
 function modalLagarto(){
     tituloModal.text("Lagarta-da-soja(Helicoverpa armigera) ")
-    paragrafoModal.text("Temperatura: Clima quente, ideal entre 20°C e 28°C. Umidade do ar: Umidade relativa do ar entre 20% e 40%. Umidade do solo: Solo úmido, mas não encharcado.")
+    paragrafoModal.text("Temperatura: Clima quente, ideal entre 20°C e 28°C. Umidade do ar: Umidade relativa do ar entre 10% e 30%. Umidade do solo: Solo úmido, mas não encharcado.")
 }
 
 function modalMosca(){
@@ -318,7 +318,7 @@ function monitoraPragasSoja(temperatura, umidadeAr, umidadeSolo){
     var monitoraNematoideDasRaizes = false;
 
     if((temperatura >= 20 && temperatura <= 28) &&
-       (umidadeAr >= 60 && umidadeAr <= 80) &&
+       (umidadeAr >= 10 && umidadeAr <= 30) &&
        (umidadeSolo > 18 && umidadeSolo <= 35 )){
         monitoraLagartoDaSoja = true;
     } 
