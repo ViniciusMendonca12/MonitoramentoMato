@@ -137,6 +137,10 @@
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="/scripts/modais.js"></script>
+<script src="/scripts/thingSpeak.js"></script>
+
+
 
 <script>
 var monitorar = $("#monitorar")
@@ -144,31 +148,24 @@ var soja = $("#soja")
 var milho = $("#milho")
 var algodao = $("#algodao")
 
-
-var tituloModal = $("#tituloModal")
-var paragrafoModal = $("#paragrafoModal")
-
-
-
- function verMais(){
-    var cultura = $("#cultura").val()
-    if(cultura == 1){
-        monitorar.hide()
-        soja.show()
-        milho.hide()
-        algodao.hide()
-    }else if(cultura == 2){
-        monitorar.hide()
-        soja.hide()
-        milho.show()
-        algodao.hide()
-    }else if(cultura == 3){
-        monitorar.hide()
-        soja.hide()
-        milho.hide()
-        algodao.show()
-    }
-    
+function verMais(){
+   var cultura = $("#cultura").val()
+   if(cultura == 1){
+       monitorar.hide()
+       soja.show()
+       milho.hide()
+       algodao.hide()
+   }else if(cultura == 2){
+       monitorar.hide()
+       soja.hide()
+       milho.show()
+       algodao.hide()
+   }else if(cultura == 3){
+       monitorar.hide()
+       soja.hide()
+       milho.hide()
+       algodao.show()
+   }
 } 
 
 function voltarClick(){
@@ -178,261 +175,9 @@ function voltarClick(){
     algodao.hide()
 }
 
-function modalLagarto(){
-    tituloModal.text("Lagarta-da-soja(Helicoverpa armigera) ")
-    paragrafoModal.text("Temperatura: Clima quente, ideal entre 20°C e 28°C. Umidade do ar: Umidade relativa do ar entre 10% e 30%. Umidade do solo: Solo úmido, mas não encharcado.")
-}
-
-function modalMosca(){
-    tituloModal.text("Mosca-branca (Bemisia tabaci)")
-    paragrafoModal.text("Temperatura: Clima quente e seco, ideal entre 25°C e 30°C. Umidade do ar: Umidade relativa do ar baixa, ideal entre 20% e 40%. Umidade do solo: Solo seco.")
-}
-
-function modalFerrugem(){
-    tituloModal.text("Ferrugem-asiática (Phakopsora pachyspora)")
-    paragrafoModal.text("Temperatura: Temperaturas amenas entre 15°C e 25°C. Umidade do ar: Clima úmido com chuvas frequentes, alta umidade relativa do ar (acima de 80%). Umidade do solo: Solo úmido.")   
-}
-
-function modalNematoide(){
-    tituloModal.text("Nematóides-das-raízes (Meloidogyne incognita e Heterodera glycines)")
-    paragrafoModal.text("Temperatura: Temperatura do solo entre 20°C e 30°C. Umidade do ar: Umidade relativa do ar entre 50% e 80%. Umidade do solo: Solos arenosos com baixa fertilidade e boa drenagem.")
-}
-/* --------------------------------------------- */
-
-function modalLagartoCartucho(){
-    tituloModal.text("Lagarta-do-cartucho (Spodoptera frugiperda)")
-    paragrafoModal.text("Temperatura: Clima quente e úmido, ideal entre 25°C e 30°C. Umidade do ar: Umidade relativa do ar alta, acima de 40%. Umidade do solo: Solo úmido.")
-}
-
-function modalMyzus(){
-    tituloModal.text("Áfidos (Myzus persicae)")
-    paragrafoModal.text("Temperatura: Clima ameno, ideal entre 18°C e 25°C. Umidade do ar: Clima seco, umidade relativa do ar entre 40% e 60%. Umidade do solo: Solo úmido.")
-}
-
-function modalCapinzais(){
-    tituloModal.text("Curuquerê-dos-capinzais (Mocis latipes)")
-    paragrafoModal.text("Temperatura: Clima quente e úmido, ideal entre 20°C e 28°C. Umidade do ar: Umidade relativa do ar alta, acima de 70%. Umidade do solo: Solo úmido.")
-}
-
-/* --------------------------------------------- */
-
-function modalAngular(){
-    tituloModal.text("Mancha-de-angular (Xanthomonas axonopodis pv. malvacearum)")
-    paragrafoModal.text("Temperatura quente: A faixa ideal para o desenvolvimento da bactéria está entre 25°C e 32°C. Temperaturas acima de 35°C: Podem inibir o crescimento da bactéria. Noites frias: Favorecem a formação de orvalho, que aumenta a umidade e cria um ambiente propício para a disseminação da bactéria. Irrigação por aspersão: A irrigação por aspersão facilita a dispersão da bactéria pelas gotas de água. Fertilização nitrogenada excessiva: Excesso de nitrogênio na adubação pode aumentar a suscetibilidade da planta à doença.")
-}
-
-function modalBicudo(){
-    tituloModal.text("Bicudo-do-algodoeiro (Anthonomus grandis)")
-    paragrafoModal.text("Clima quente e úmido: Temperaturas entre 25°C e 30°C e umidade relativa do ar acima de 70%. Plantas jovens: O ataque é mais frequente em plantas jovens, no início do desenvolvimento. Presença de plantas hospedeiras alternativas: Plantas como malva e hibisco, hospedeiras do bicudo, nas proximidades do algodoeiro podem aumentar o risco de infestação.")
-}
-
-function modalMofo(){
-    tituloModal.text("Mofo-cinzento (Botrytis cinerea)")
-    paragrafoModal.text("Clima úmido e frio: Temperaturas amenas entre 15°C e 20°C e alta umidade relativa do ar (acima de 80%) favorecem o desenvolvimento do fungo. Lesões causadas por pragas: A presença de feridas causadas por insetos como o bicudo-do-algodoeiro pode facilitar a entrada do fungo na planta. Flores e capulhos úmidos: Condições de alta umidade no interior das flores e capulões devido a chuvas frequentes ou orvalho denso.")
-}
-
-function modalRosca(){
-    tituloModal.text("Lagarta-rosca (Agrotis ipsilon)")
-    paragrafoModal.text("Clima úmido: Maior incidência em solos úmidos e com boa disponibilidade de água. Solo mal preparado: Solos mal preparados, com torrões ou desníveis, favorecem o abrigo das lagartas. Presença de plantas daninhas: Plantas daninhas servem como fonte de alimento para as lagartas.")
-}
-
-var tituloModalMonitoramento = $("#tituloModalMonitoramento")
-var paragrafoModalMonitoramento = $("#paragrafoModalMonitoramento")
-
 function fecharMonitoramentoBtn(){
     $("#modalConfirmacao").modal("hide");
 
 }
-var paragrafoModalConfirmacao = $("#paragrafoModalConfirmacao")
-
-function buscarDadosThingSpeak(channelID, apiKey, callback) {
-  var url = "https://api.thingspeak.com/channels/" + channelID + "/feeds.json?api_key=" + apiKey;
-
-  $.getJSON(url, function(data) {
-    if (data.hasOwnProperty('error')) {
-      console.error("Erro:", data.error);
-    } else {
-      callback(data); 
-    }
-  });
-}
-
-
-
-$(document).ready(function() {
-  var canalID = "2533323"; // 
-  var apiKey = "QGNJSGKCKAQOS5NM";
-
-    var temperatura 
-    var umidadeAr 
-    var umidadeSolo
-  buscarDadosThingSpeak(canalID, apiKey, function(dados) {
-    var tamanho = dados.feeds.length
-    console.log(tamanho)
-    console.log(dados); 
-    console.log(dados.feeds[99].field1);
-    console.log(dados.feeds[99].field2); 
-    console.log(dados.feeds[99].field3);  
- 
-    var temperatura = dados.feeds[99].field1
-    var umidadeAr = dados.feeds[99].field2
-    var umidadeSolo = dados.feeds[99].field3
-
-    $("#monitorarSojaClick").click(function(){
-    paragrafoModalConfirmacao.html("")
-    tituloModalMonitoramento.text("Monitoramento da Soja")
-    paragrafoModalMonitoramento.text("")
-    $("#modalConfirmacao").modal("show");
-    monitoraPragasSoja(temperatura, umidadeAr, umidadeSolo)
-})
-
-$("#monitorarMilhoClick").click(function(){
-    paragrafoModalConfirmacao.html("")
-    tituloModalMonitoramento.text("Monitoramento do Milho")
-    paragrafoModalMonitoramento.text()
-    $("#modalConfirmacao").modal("show");
-    monitoraPragasMilho(temperatura, umidadeAr, umidadeSolo)
-})
-
-$("#monitorarAlgodaoClick").click(function(){
-    paragrafoModalConfirmacao.html("")
-    tituloModalMonitoramento.text("Monitoramento do Algodão")
-    paragrafoModalMonitoramento.text()
-    $("#modalConfirmacao").modal("show");
-    monitoraPragasAlgodao(temperatura, umidadeAr, umidadeSolo)
-})
-    
-  });
-});
-
-
-
-
-
-
-
-function monitoraPragasSoja(temperatura, umidadeAr, umidadeSolo){
-    var monitoraLagartoDaSoja = false;
-    var monitoraMoscaBranca = false;
-    var monitoraFerrugemAsiatica = false;
-    var monitoraNematoideDasRaizes = false;
-
-    if((temperatura >= 20 && temperatura <= 28) &&
-       (umidadeAr >= 10 && umidadeAr <= 30) &&
-       (umidadeSolo > 18 && umidadeSolo <= 35 )){
-        monitoraLagartoDaSoja = true;
-    } 
-
-    if((temperatura >= 25 && temperatura <= 30) &&
-       (umidadeAr >= 20 && umidadeAr <= 40) &&
-       (umidadeSolo > 0 && umidadeSolo > 10 )){
-        monitoraMoscaBranca = true; 
-    }  
-
-    if((temperatura >= 15 && temperatura <= 25) &&
-       (umidadeAr >= 80 && umidadeAr <= 100) &&
-       (umidadeSolo > 18 && umidadeSolo <= 35)){
-        monitoraFerrugemAsiatica = true;
-    }
-
-    if((temperatura >= 20 && temperatura <= 30) &&
-       (umidadeAr >= 50 && umidadeAr <= 80) &&
-       (umidadeSolo > 0 && umidadeSolo > 10 )){
-        monitoraNematoideDasRaizes = true;
-    }     
-    console.log("Pragas a serem monitoradas soja:");
-  if (monitoraLagartoDaSoja) paragrafoModalConfirmacao.html("Lagarto Da Soja &nbsp;<br>")
-  if (monitoraMoscaBranca) paragrafoModalConfirmacao.append("Mosca Branca &nbsp;<br>") 
-  if (monitoraFerrugemAsiatica) paragrafoModalConfirmacao.append("FerrugemAsiatica &nbsp;<br>")
-  if (monitoraNematoideDasRaizes) paragrafoModalConfirmacao.append("Nematoide das Raizes &nbsp;<br>")
-  paragrafoModalConfirmacao.append(` Temperatura: ${temperatura} Umidade do Solo: ${umidadeSolo} Umidade do ar: ${umidadeAr}` )
-
-}
-
-function monitoraPragasMilho(temperatura, umidadeAr, umidadeSolo){
-var monitoraLagartoCartucho = false;
-var monitoraCuruquereCapinzais = false;
-var monitoraLagartaSoja = false;
-var monitoraAfidos = false;
-
-if((temperatura >= 25 && temperatura <= 30) &&
-   (umidadeAr >= 70 && umidadeAr <= 100) &&
-   (umidadeSolo > 18 && umidadeSolo <= 35)){
-    monitoraLagartoCartucho = true;
-} 
-
-if((temperatura >= 20 && temperatura <= 28) &&
-(umidadeAr >= 70 && umidadeAr <= 100) &&
-   (umidadeSolo > 18 && umidadeSolo <= 35)){
-    monitoraCuruquereCapinzais = true;
-}  
-
-if((temperatura >= 20 && temperatura <= 28) &&
-    (umidadeAr >= 10 && umidadeAr <= 30) &&
-    (umidadeSolo > 18 && umidadeSolo <= 35)){
-    monitoraLagartaSoja = true;
-}
-
-if((temperatura >= 18 && temperatura <= 25) &&
-   (umidadeAr >= 40 && umidadeAr <= 60) &&
-   (umidadeSolo > 18 && umidadeSolo <= 35)){
-    monitoraAfidos = true;
-}     
-console.log("Pragas a serem monitoradas milho:");
-if (monitoraLagartoCartucho) paragrafoModalConfirmacao.html("Lagarto Cartucho &nbsp;<br>");
-if (monitoraCuruquereCapinzais) paragrafoModalConfirmacao.append("Curuquere Capinzais &nbsp;<br>");
-if (monitoraLagartaSoja) paragrafoModalConfirmacao.append("Lagarta Soja &nbsp;<br>");
-if (monitoraAfidos) paragrafoModalConfirmacao.append("Monitora Afidos &nbsp;<br>");
-paragrafoModalConfirmacao.append(` Temperatura: ${temperatura} Umidade do Solo: ${umidadeSolo} Umidade do ar: ${umidadeAr}` )
-
-}
-
-function monitoraPragasAlgodao(temperatura, umidadeAr, umidadeSolo){
-var ManchaAngular = false;
-var BicudoAlgodoeiro = false;
-var MofoCinzento = false;
-var LagartaRosca = false;
-
-if((temperatura >= 25 && temperatura <= 32) &&
-   (umidadeAr >= 50 && umidadeAr <= 80) &&
-   (umidadeSolo > 18 && umidadeSolo <= 35)){
-    ManchaAngular = true;
-} 
-
-if((temperatura >= 25 && temperatura <= 30) &&
-(umidadeAr >= 70 && umidadeAr <= 100) &&
-   (umidadeSolo > 18 && umidadeSolo <= 35)){
-    BicudoAlgodoeiro = true;
-}  
-
-if((temperatura >= 15 && temperatura <= 20) &&
-    (umidadeAr >= 81 && umidadeAr <= 100) &&
-    (umidadeSolo > 45 && umidadeSolo <= 55)){
-    MofoCinzento = true;
-}
-
-if((temperatura >= 20 && temperatura <= 30) &&
-   (umidadeAr >= 15 && umidadeAr <= 40) &&
-   (umidadeSolo > 18 && umidadeSolo <= 35)){
-    LagartaRosca = true;
-}     
-console.log("Pragas a serem monitoradas algodao:");
-if (ManchaAngular) paragrafoModalConfirmacao.html("Mancha Angular &nbsp;<br>");
-if (BicudoAlgodoeiro) paragrafoModalConfirmacao.append("Bicudo Algodoeiro &nbsp;<br>");
-if (MofoCinzento) paragrafoModalConfirmacao.append("Mofo Cinzento &nbsp;<br>");
-if (LagartaRosca) paragrafoModalConfirmacao.append("Lagarta Rosca &nbsp;<br>");
-paragrafoModalConfirmacao.append(` Temperatura: ${temperatura} Umidade do Solo: ${umidadeSolo} Umidade do ar: ${umidadeAr}` )
-
-}
-
-
-/* monitoraPragasMilho(26, 60, "Solo úmido, mas não encharcado" )
-
-monitoraPragasAlgodao(26, 60, "Solo úmido, mas não encharcado" )
- */ 
-
-
-
-
 </script>
 </html>
